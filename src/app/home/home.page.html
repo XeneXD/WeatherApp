@@ -1,20 +1,69 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Weather App</ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="settings-button" (click)="navigateToSettings()">Settings</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="weather-container">
+  <div class="theme-container">
+  
+    <div *ngIf="weatherData" class="weather-card">
+      <h1>{{ weatherData?.locationName || 'Unknown Location' }}</h1>
+      <img *ngIf="weatherData?.weatherIcon" [src]="weatherData?.weatherIcon" alt="Weather Icon">
+      <div class="temperature">
+        {{ weatherData?.temperature || 'N/A' }}°{{ temperatureUnit === 'metric' ? 'C' : 'F' }}
+      </div>
+      <div class="details">
+        <p><strong>Condition:</strong> {{ weatherData?.weatherDescription || 'N/A' }}</p>
+        <p><strong>Humidity:</strong> {{ weatherData?.humidity || 'N/A' }}%</p>
+        <p><strong>Wind Speed:</strong> {{ weatherData?.windSpeed || 'N/A' }} {{ temperatureUnit === 'metric' ? 'm/s' : 'mph' }}</p>
+      </div>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+   
+    <div class="manual-location">
+      <ion-item>
+        <ion-input id="manual-location-input" [(ngModel)]="manualLocation" placeholder="Enter location"></ion-input>
+        <ion-button id="manual-location-submit" slot="end" (click)="onManualLocationSubmit()">Search</ion-button>
+      </ion-item>
+    </div>
+
+   
+    <div *ngIf="forecastData?.length" class="forecast">
+      <h2>5-Day Forecast</h2>
+      <ion-list>
+        <ion-item *ngFor="let day of forecastData">
+          <ion-label>
+            <p>{{ day.date | date: 'fullDate' }}</p>
+            <p>Temp: {{ day.temperature }}°{{ temperatureUnit === 'metric' ? 'C' : 'F' }}</p>
+            <p>Condition: {{ day.condition }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  
+    <div *ngIf="hourlyData?.length" class="hourly">
+      <h2>Hourly Updates</h2>
+      <ion-list>
+        <ion-item *ngFor="let hour of hourlyData">
+          <ion-label>
+            <p>{{ hour.time | date: 'shortTime' }}</p>
+            <p>Temp: {{ hour.temperature }}°{{ temperatureUnit === 'metric' ? 'C' : 'F' }}</p>
+            <p>Condition: {{ hour.condition }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  
+    <ng-template #errorTemplate>
+      <div class="error-message">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </ng-template>
   </div>
 </ion-content>

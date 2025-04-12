@@ -1,0 +1,80 @@
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+
+  @media (orientation: landscape) {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+  }
+}
+
+body.light-theme .settings-container {
+  background: #ffffff;
+  color: #000000;
+}
+
+body.dark-theme .settings-container {
+  background: linear-gradient(to bottom, #121212, #1e1e1e);
+  color: #ffffff;
+}
+
+ion-toolbar {
+  --background: transparent;
+  --color: white;
+  box-shadow: none;
+}
+
+ion-item {
+  --background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+ion-label {
+  font-size: 16px;
+  color: white;
+}
+
+ion-select {
+  --color: white;
+}
+
+ion-select-option {
+  --color: black;
+}
+
+ion-list {
+  width: 100%;
+  max-width: 400px;
+
+  @media (orientation: landscape) {
+    max-width: 300px;
+  }
+}
+
+ion-button {
+  --background: #ffffff;
+  --color: #ff758c;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  @media (orientation: landscape) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

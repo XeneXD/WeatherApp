@@ -6,12 +6,14 @@ describe('SettingsPage', () => {
   let fixture: ComponentFixture<SettingsPage>;
 
   beforeEach(() => {
+    
     fixture = TestBed.createComponent(SettingsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    
     expect(component).toBeTruthy();
   });
 });
